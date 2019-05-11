@@ -11,11 +11,39 @@
 <body>
     
     <div class="container">
-            <label>usuario</label>
-            <input type="text" class="form-control" id="user">
-            <label>contraseña:</label>
-            <input type="password" class="form-control" id="pwd">
-            <button class="btn btn-primary" onclick="">Entrar</button>
+            <label>Registro</label>
+            
+            <label>Nombre</label>
+            <input  class="form-control" id="Nombre">
+           
+            <label>Apellido</label>
+            <input  class="form-control" id="Apellido">
+           
+            <label>Correo</label>
+            <input  class="form-control" id="Correo">
+
+            <label>Posicion Favorita</label>
+            <div>
+
+                <label class="radio-inline" ><input type="radio" name="PosicionF" value="4" checked>Posicion 4</label>
+                <label class="radio-inline" ><input type="radio" name="PosicionF" value="3">Posicion 3</label>
+                <label class="radio-inline" ><input type="radio" name="PosicionF" value="2">Posicion 2</label>
+            </div>
+            <div>
+
+                <label class="radio-inline" ><input type="radio" name="PosicionF" value="5">Posicion 5</label>
+                <label class="radio-inline" ><input type="radio" name="PosicionF" value="6">Posicion 6</label>
+                <label class="radio-inline" ><input type="radio" name="PosicionF" value="1">Posicion 1</label>
+            </div>
+
+            <label>Nombre de Usuario</label>
+            <input  class="form-control" id="Usuario">
+
+            <label>Contraseña</label>
+            <input  class="form-control" id="Contraseña">
+           
+    
+            <button class="btn btn-primary" onclick="registrar()">Registrar</button>
     </div>
 <!--  FIREBASE  -->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -51,6 +79,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 
-<script src="js/index.js"></script>
+<script src="js/registro.js"></script>
 </body>
 </html>
