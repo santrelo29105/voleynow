@@ -1,3 +1,4 @@
+
 function registrar(){
 
     var nombre = document.getElementById("Nombre").value;
@@ -7,22 +8,32 @@ function registrar(){
     var usuario= document.getElementById("Usuario").value;
     var contraseña= document.getElementById("Contraseña").value;
     var verificar = validarnull(nombre,apellido,correo,posicionF,usuario,contraseña);
-
+    var buscaruser = false;
     if(verificar == true){
-     var setRegister = firebase.database().ref('Usuarios');
-     setRegister.child(usuario).set({
-        Apellido : apellido,
-        Contraseña : contraseña,
-        Correo : correo,
-        Nombre : nombre,
-        Posicion : posicionF
-     });
+       
+        buscaruser = buscarUsuario(usuario);
+        
+     
+        if(buscaruser == false){
+            var setRegister = firebase.database().ref('Usuarios');
+            setRegister.child(usuario).set({
+            Apellido : apellido,
+            Contraseña : contraseña,
+            Correo : correo,
+            Nombre : nombre,
+            Posicion : posicionF
+            });
+        }
+        if(buscaruser == true){
+            document.getElementById("Usuario").classList.add("alert-danger");
+            window.alert("Este usuario ya esta en uso");
+        }
     }
 }
 
 function validarnull(nombre,apellido,correo,posicionF,usuario,contraseña){
     var verificar=true;
-    console.log("aqui");
+    
     if(nombre==""){
         document.getElementById("Nombre").classList.add("alert-danger");
         verificar =false;        
@@ -45,4 +56,22 @@ function validarnull(nombre,apellido,correo,posicionF,usuario,contraseña){
     }
 
     return verificar;
+}
+
+function buscarUsuario(usuario){
+    
+    var ref = firebase.database().ref('Usuarios');
+    var retornar = false;
+    ref.orderByValue().limitToLast(3).on("value",function(snapchot){
+        snapchot.forEach(function(data){
+            var isEqual = JSON.stringify(data.key) === JSON.stringify(usuario);
+        if(isEqual == true){
+          
+        retornar = true;  
+        return retornar;
+        }
+        });
+    });
+    
+    return retornar; 
 }
